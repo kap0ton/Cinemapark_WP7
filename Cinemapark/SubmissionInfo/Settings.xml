@@ -1,0 +1,6 @@
+<MarketplaceDetails>
+  <SmallAppTile>SmallAppTitle.png</SmallAppTile>
+  <LargeAppTile>LargeAppTitle.png</LargeAppTile>
+  <PCAppTile>MarketplaceTitle.png</PCAppTile>
+  <ScreenShots>screenMain.png;screenMultiplexes.png;screenSchedule.png;;;;;;</ScreenShots>
+</MarketplaceDetails>

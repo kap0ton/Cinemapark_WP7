@@ -1,0 +1,57 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="Cinemapark.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="696"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait"
+    Orientation="Portrait"
+    shell:SystemTray.IsVisible="True">
+
+	<!--LayoutRoot is the root grid where all page content is placed-->
+	<Grid x:Name="LayoutRoot" Style="{StaticResource PageLayoutStyle}">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+
+		<!--TitlePanel contains the name of the application and page title-->
+		<StackPanel x:Name="TitlePanel" Grid.Row="0" Style="{StaticResource TitlePanelStyle}">
+			<TextBlock x:Name="ApplicationTitle" Text="{Binding Path=Multiplex.FullName}" Style="{StaticResource PhoneTextNormalStyle}"/>
+			<TextBlock x:Name="PageTitle" Text="movies" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+		</StackPanel>
+
+		<!--ContentPanel - place additional content here-->
+		<Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+			<Image Source="Images/bg_movie.png" Opacity="0.3" Stretch="Uniform" Height="350" />
+			<ListBox x:Name="MovieListBox" ItemsSource="{Binding Path=Movies}" SelectionChanged="MovieListBox_OnSelectionChanged">
+				<ListBox.ItemTemplate>
+					<DataTemplate>
+						<StackPanel Margin="0,5,0,0" Orientation="Horizontal">
+							<Border BorderBrush="#FF2C66A1" BorderThickness="5" CornerRadius="7" Margin="5">
+								<Image Width="80" MinHeight="80" Source="{Binding Path=ImageUrl}" />
+							</Border>
+							<TextBlock Margin="5,0,0,0" TextWrapping="NoWrap" Text="{Binding Path=Title}" VerticalAlignment="Center" FontSize="24" />
+						</StackPanel>
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
+		</Grid>
+		
+	</Grid>
+
+	<!--Sample code showing usage of ApplicationBar-->
+	<phone:PhoneApplicationPage.ApplicationBar>
+		<shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Mode="Default">
+			<shell:ApplicationBarIconButton x:Name="RefreshBarIconButton" IconUri="/icons/appbar.refresh.rest.png" Text="refresh" Click="RefreshBarIconButton_OnClick" />
+			<shell:ApplicationBarIconButton x:Name="SettingsBarIconButton" IconUri="/icons/appbar.feature.settings.rest.png" Text="settings" Click="SettingsBarIconButton_OnClick" />
+		</shell:ApplicationBar>
+	</phone:PhoneApplicationPage.ApplicationBar>
+
+</phone:PhoneApplicationPage>
