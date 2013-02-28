@@ -9,9 +9,9 @@ using System.Resources;
 [assembly: AssemblyTitle("Cinemapark")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("EPAM Systems")]
+[assembly: AssemblyCompany("kap_ton")]
 [assembly: AssemblyProduct("Cinemapark")]
-[assembly: AssemblyCopyright("Copyright © EPAM Systems 2012")]
+[assembly: AssemblyCopyright("Copyright © kap_ton 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -32,6 +32,6 @@ using System.Resources;
 //
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.1.0")]
+[assembly: AssemblyFileVersion("1.1.0")]
 [assembly: NeutralResourcesLanguageAttribute("en-US")]
