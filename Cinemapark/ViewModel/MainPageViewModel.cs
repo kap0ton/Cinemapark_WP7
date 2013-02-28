@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Threading;
 using System.Windows;
 using System.Xml.Linq;
 using Cinemapark.Model;
+using Cinemapark.Resources;
 
 namespace Cinemapark.ViewModel
 {
@@ -62,19 +65,32 @@ namespace Cinemapark.ViewModel
 
 		public void Load()
 		{
-			//TODO: load multiplex
 			Multiplex = _appSettings.Multiplex;
 			if (_multiplex == null)
 			{
 				//load default multiplex
 				Multiplex = new Multiplex
-				            	{
-				            		MultiplexId = 18,
-				            		City = "Саратов",
-				            		Title = "Триумф Молл"
-				            	};
+					{
+						MultiplexId = 18,
+						City = "Саратов",
+						Title = "Триумф Молл"
+					};
 				_appSettings.Multiplex = Multiplex;
 			}
+			string culture;
+			switch (_appSettings.Language)
+			{
+				case Language.Russian:
+					culture = "ru-RU";
+					break;
+				default:
+					culture = "en-NZ";
+					break;
+			}
+			var ci = new CultureInfo(culture);
+			Thread.CurrentThread.CurrentCulture = ci;
+			Thread.CurrentThread.CurrentUICulture = ci;
+			((LocalizedStrings) Application.Current.Resources["LocalizedStrings"]).ResetResources();
 
 			//load movies
 			LoadMovies();

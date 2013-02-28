@@ -12,9 +12,11 @@ namespace Cinemapark
 			_settings = IsolatedStorageSettings.ApplicationSettings;
 		}
 
+		#region Helper methods
+
 		private bool AddOrUpdateValue(string key, object value)
 		{
-			bool valueChanged = false;
+			var valueChanged = false;
 
 			if (_settings.Contains(key))
 			{
@@ -52,8 +54,15 @@ namespace Cinemapark
 			_settings.Save();
 		}
 
+		#endregion
+
+		#region Multiplex
+
 		private const string MultiplexKey = "MultiplexKey";
 
+		/// <summary>
+		/// Gets or sets Multiplex
+		/// </summary>
 		public Multiplex Multiplex
 		{
 			get { return GetValueOrDefault<Multiplex>(MultiplexKey, null); }
@@ -63,5 +72,26 @@ namespace Cinemapark
 					Save();
 			}
 		}
+
+		#endregion
+
+		#region Language
+
+		private const string LanguageKey = "LanguageKey";
+
+		/// <summary>
+		/// Gets or sets Language
+		/// </summary>
+		public Language Language
+		{
+			get { return GetValueOrDefault(LanguageKey, Language.English); }
+			set
+			{
+				if(AddOrUpdateValue(LanguageKey, value))
+					Save();
+			}
+		}
+
+		#endregion
 	}
 }

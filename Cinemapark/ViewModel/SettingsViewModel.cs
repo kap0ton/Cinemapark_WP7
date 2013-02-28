@@ -25,6 +25,17 @@ namespace Cinemapark.ViewModel
 			}
 		}
 
+		private Language _selectedLanguage;
+		public Language SelectedLanguage
+		{
+			get { return _selectedLanguage; }
+			set
+			{
+				_selectedLanguage = value;
+				NotifyPropertyChanged("SelectedLanguage");
+			}
+		}
+
 		private readonly ObservableCollection<Multiplex> _multiplexes;
 		public ObservableCollection<Multiplex> Multiplexes
 		{
@@ -64,6 +75,7 @@ namespace Cinemapark.ViewModel
 			var client = new WebClient();
 			client.DownloadStringCompleted += GetMultiplexesCompleted;
 			client.DownloadStringAsync(new Uri(Multiplex.MultiplexUri, UriKind.Absolute));
+			SelectedLanguage = _appSettings.Language;
 		}
 
 		private void GetMultiplexesCompleted(object sender, DownloadStringCompletedEventArgs e)
@@ -112,6 +124,11 @@ namespace Cinemapark.ViewModel
 		public void SaveSelectedMultiplex()
 		{
 			_appSettings.Multiplex = SelectedMultiplex;
+		}
+
+		public void SaveSelectedLanguage()
+		{
+			_appSettings.Language = SelectedLanguage;
 		}
 	}
 }

@@ -7,7 +7,6 @@ namespace Cinemapark
 {
 	public class PriceColorConverter : IValueConverter
 	{
-
 		#region IValueConverter Members
 
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

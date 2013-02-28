@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 using Cinemapark.Model;
+using Cinemapark.Resources;
 using Cinemapark.ViewModel;
+using Microsoft.Phone.Shell;
 
 namespace Cinemapark
 {
@@ -46,5 +49,23 @@ namespace Cinemapark
 		}
 
 		//save results after reservation a place
+		private void MainPage_OnLoaded(object sender, RoutedEventArgs e)
+		{
+			ApplicationBar = new ApplicationBar();
+
+			var btnRefresh = new ApplicationBarIconButton(new Uri("/icons/appbar.refresh.rest.png", UriKind.Relative))
+				{
+					Text = AppResources.RefreshBtn
+				};
+			btnRefresh.Click += RefreshBarIconButton_OnClick;
+			ApplicationBar.Buttons.Add(btnRefresh);
+
+			var btnSettings = new ApplicationBarIconButton(new Uri("/icons/appbar.feature.settings.rest.png", UriKind.Relative))
+				{
+					Text = AppResources.SettingsBtn
+				};
+			btnSettings.Click += SettingsBarIconButton_OnClick;
+			ApplicationBar.Buttons.Add(btnSettings);
+		}
 	}
 }

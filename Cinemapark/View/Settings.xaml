@@ -5,19 +5,27 @@
 	xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-	mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="696"
+	xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+	xmlns:model="clr-namespace:Cinemapark.Model"
+	mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
 	x:Class="Cinemapark.View.Settings"
 	FontFamily="{StaticResource PhoneFontFamilyNormal}"
 	FontSize="{StaticResource PhoneFontSizeNormal}"
 	Foreground="{StaticResource PhoneForegroundBrush}"
-	Orientation="Portrait"
+	Orientation="Portrait" Loaded="Settings_OnLoaded"
 	shell:SystemTray.IsVisible="True">
+
+	<phone:PhoneApplicationPage.Resources>
+		<model:LanguageRadioConverter x:Key="LanguageRadioConverter" />
+	</phone:PhoneApplicationPage.Resources>
 	
-	<phone:PhoneApplicationPage.ApplicationBar>
+	<!--<phone:PhoneApplicationPage.ApplicationBar>
 		<shell:ApplicationBar>
-			<shell:ApplicationBarIconButton x:Name="SaveBarIconButton" IconUri="/icons/appbar.save.rest.png" IsEnabled="True" Text="save" Click="SaveBarIconButton_OnClick" />
+			<shell:ApplicationBarIconButton x:Name="SaveBarIconButton" 
+				IconUri="/icons/appbar.save.rest.png" IsEnabled="True"
+				Text="save" Click="SaveBarIconButton_OnClick" />
 		</shell:ApplicationBar>
-	</phone:PhoneApplicationPage.ApplicationBar>
+	</phone:PhoneApplicationPage.ApplicationBar>-->
 
 	<!--LayoutRoot is the root grid where all page content is placed-->
 	<Grid x:Name="LayoutRoot" Style="{StaticResource PageLayoutStyle}">
@@ -28,26 +36,46 @@
 		
 		<!--TitlePanel contains the name of the application and page title-->
 		<StackPanel x:Name="TitlePanel" Grid.Row="0" Style="{StaticResource TitlePanelStyle}">
-			<TextBlock x:Name="ApplicationTitle" Text="cinemapark" Style="{StaticResource PhoneTextNormalStyle}"/>
-			<TextBlock x:Name="PageTitle" Text="multiplexes" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+			<TextBlock x:Name="ApplicationTitle" Text="{Binding Path=AppResources.Settings, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}"/>
+			<!--<TextBlock x:Name="PageTitle" Text="multiplexes" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>-->
 		</StackPanel>
 
 		<!--ContentPanel - place additional content here-->
-		<Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+		<Grid Grid.Row="1" x:Name="ContentPanel" Margin="12,0,12,0">
 			<Image Source="../Images/bg_settings.png" Opacity="0.3" Stretch="Uniform" Height="350" VerticalAlignment="Bottom" HorizontalAlignment="Right" />
-			<ListBox x:Name="MultiplexListBox" ItemsSource="{Binding Path=Multiplexes}" SelectedItem="{Binding Path=SelectedMultiplex, Mode=TwoWay}">
-				<ListBox.Resources>
-					<DataTemplate x:Key="MultiplexDataTemplate">
-						<StackPanel Orientation="Horizontal" Margin="15, 7,0,7">
-							<TextBlock Text="{Binding Path=City}" TextWrapping="NoWrap" FontSize="21.333" VerticalAlignment="Center" />
-							<TextBlock Text="{Binding Path=Title}" TextWrapping="NoWrap" Margin="15,0,0,0" FontSize="24" VerticalAlignment="Center" />
-						</StackPanel>
-					</DataTemplate>
-				</ListBox.Resources>
-				<ListBox.ItemTemplate>
-					<StaticResource ResourceKey="MultiplexDataTemplate"/>
-				</ListBox.ItemTemplate>
-			</ListBox>
+			<controls:Pivot Grid.Row="1">
+				<controls:PivotItem Header="{Binding Path=AppResources.Multiplexes, Source={StaticResource LocalizedStrings}}">
+
+					<ListBox x:Name="MultiplexListBox" ItemsSource="{Binding Path=Multiplexes}" SelectedItem="{Binding Path=SelectedMultiplex, Mode=TwoWay}">
+						<ListBox.Resources>
+							<DataTemplate x:Key="MultiplexDataTemplate">
+								<StackPanel Orientation="Horizontal" Margin="15, 7,0,7">
+									<TextBlock Text="{Binding Path=City}" TextWrapping="NoWrap" FontSize="21.333" VerticalAlignment="Center" />
+									<TextBlock Text="{Binding Path=Title}" TextWrapping="NoWrap" Margin="15,0,0,0" FontSize="24" VerticalAlignment="Center" />
+								</StackPanel>
+							</DataTemplate>
+						</ListBox.Resources>
+						<ListBox.ItemTemplate>
+							<StaticResource ResourceKey="MultiplexDataTemplate"/>
+						</ListBox.ItemTemplate>
+					</ListBox>
+				</controls:PivotItem>
+				<controls:PivotItem Header="{Binding Path=AppResources.Language, Source={StaticResource LocalizedStrings}}">
+
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto"/>
+							<RowDefinition Height="Auto"/>
+							<RowDefinition Height="*"/>
+						</Grid.RowDefinitions>
+
+						<RadioButton Content="english" Grid.Row="0" GroupName="lng"
+								 IsChecked="{Binding Path=SelectedLanguage, Mode=TwoWay, Converter={StaticResource LanguageRadioConverter}, ConverterParameter=English}"></RadioButton>
+						<RadioButton Content="русский" Grid.Row="1" GroupName="lng"
+								 IsChecked="{Binding Path=SelectedLanguage, Mode=TwoWay, Converter={StaticResource LanguageRadioConverter}, ConverterParameter=Russian}"></RadioButton>
+					</Grid>
+				</controls:PivotItem>
+			</controls:Pivot>
 		</Grid>
 	</Grid>
 </phone:PhoneApplicationPage>
