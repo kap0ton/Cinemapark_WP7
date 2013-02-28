@@ -22,7 +22,7 @@ namespace Cinemapark.Model
 
 	public class Session
 	{
-		public const string Booking = "http://www.cinemapark.ru/booking/start/{0}/{1}/"; //{0} - multiplex id, {1} - session id
+		public const string Booking = "http://booking.www.cinemapark.ru/start/{0}/{1}/"; //{0} - multiplex id, {1} - session id
 		public int Id { get; set; }
 
 		public string Time { get; set; }
