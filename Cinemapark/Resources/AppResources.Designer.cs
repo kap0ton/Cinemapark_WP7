@@ -61,6 +61,15 @@ namespace Cinemapark.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to hall.
+        /// </summary>
+        public static string Hall {
+            get {
+                return ResourceManager.GetString("Hall", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to language.
         /// </summary>
         public static string Language {

@@ -4,9 +4,17 @@ namespace Cinemapark.Model
 {
 	public class Movie
 	{
-		public const string MovieUri = "http://www.cinemapark.ru/gadgets/data/movies/{0}/"; //{0} - multiplex id
+		/// <summary>
+		/// {0} - multiplex id
+		/// </summary>
+		public const string MoviesUri = "http://www.cinemapark.ru/gadgets/data/movies/{0}/";
+
 		//private const string PosterUri = "http://www.cinemapark.ru/img/poster_large/{0}.jpg"; //{0} - movie id
-		public const string PosterUri = "http://stasis.www.cinemapark.ru/img/film/poster_large/{0}.jpg"; //{0} - movie id
+
+		/// <summary>
+		/// {0} - movie id
+		/// </summary>
+		public const string PosterUri = "http://stasis.www.cinemapark.ru/img/film/poster_large/{0}.jpg";
 
 		public string Title { get; set; }
 
