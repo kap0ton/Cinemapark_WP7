@@ -70,6 +70,8 @@ namespace Cinemapark.ViewModel
 
 		#endregion
 
+		#region Load Multiplexes
+
 		public void LoadMultiplexes()
 		{
 			var client = new WebClient();
@@ -121,6 +123,10 @@ namespace Cinemapark.ViewModel
 			}
 		}
 
+		#endregion
+
+		#region Save
+
 		public void SaveSelectedMultiplex()
 		{
 			_appSettings.Multiplex = SelectedMultiplex;
@@ -130,5 +136,7 @@ namespace Cinemapark.ViewModel
 		{
 			_appSettings.Language = SelectedLanguage;
 		}
+
+		#endregion
 	}
 }

@@ -63,22 +63,76 @@ namespace Cinemapark.ViewModel
 
 		#endregion
 
+		#region Load
+
 		public void Load()
 		{
+			SetMultiplex();
+			SetLanguage();
+		}
+
+		private void SetMultiplex()
+		{
 			Multiplex = _appSettings.Multiplex;
-			if (_multiplex == null)
+			if (Multiplex == null)
 			{
-				//load default multiplex
-				Multiplex = new Multiplex
-					{
-						MultiplexId = 18,
-						City = "Саратов",
-						Title = "Триумф Молл"
-					};
-				_appSettings.Multiplex = Multiplex;
+				var client = new WebClient();
+				client.DownloadStringCompleted += GetDefaultMultiplexesCompleted;
+				client.DownloadStringAsync(new Uri(Multiplex.MultiplexUri, UriKind.Absolute));
+			}
+			else
+			{
+				LoadMovies();
+			}
+		}
+
+		private void GetDefaultMultiplexesCompleted(object sender, DownloadStringCompletedEventArgs e)
+		{
+			try
+			{
+				if (e.Error != null)
+				{
+					Deployment.Current.Dispatcher.BeginInvoke(() => MessageBox.Show(e.Error.Message));
+				}
+				else
+				{
+					TextReader textReader = new StringReader(e.Result);
+					XDocument xDocument = XDocument.Load(textReader);
+
+					var items = (from item in xDocument.Root.Descendants("item")
+								 select new Multiplex
+								 {
+									 City = item.Attribute("city").Value,
+									 Title = item.Attribute("title").Value,
+									 MultiplexId = Int32.Parse(item.Attribute("id").Value)
+								 }).ToList().OrderBy(x => x.City).ThenBy(y => y.Title);
+
+					var m = items.FirstOrDefault(x => x.MultiplexId == Multiplex.DefaultMultiplexId);
+					Multiplex = m ?? items.FirstOrDefault();
+					_appSettings.Multiplex = Multiplex;
+
+					LoadMovies();
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message);
+			}
+		}
+
+		private void SetLanguage()
+		{
+			//set language
+			var language = _appSettings.Language;
+			if (language == Language.None)
+			{
+				language = Thread.CurrentThread.CurrentCulture.Name == "ru-RU"
+					? Language.Russian
+					: Language.English;
+				_appSettings.Language = language;
 			}
 			string culture;
-			switch (_appSettings.Language)
+			switch (language)
 			{
 				case Language.Russian:
 					culture = "ru-RU";
@@ -90,11 +144,12 @@ namespace Cinemapark.ViewModel
 			var ci = new CultureInfo(culture);
 			Thread.CurrentThread.CurrentCulture = ci;
 			Thread.CurrentThread.CurrentUICulture = ci;
-			((LocalizedStrings) Application.Current.Resources["LocalizedStrings"]).ResetResources();
-
-			//load movies
-			LoadMovies();
+			((LocalizedStrings)Application.Current.Resources["LocalizedStrings"]).ResetResources();
 		}
+
+		#endregion
+
+		#region Load Movies
 
 		public void LoadMovies()
 		{
@@ -139,5 +194,7 @@ namespace Cinemapark.ViewModel
 				MessageBox.Show(ex.Message);
 			}
 		}
+
+		#endregion
 	}
 }
