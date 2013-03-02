@@ -33,12 +33,16 @@
 			<ListBox x:Name="MovieListBox" ItemsSource="{Binding Path=Movies}" SelectionChanged="MovieListBox_OnSelectionChanged">
 				<ListBox.ItemTemplate>
 					<DataTemplate>
-						<StackPanel Margin="0,5,0,0" Orientation="Horizontal">
-							<Border BorderBrush="#FF2C66A1" BorderThickness="5" CornerRadius="7" Margin="5">
+						<Grid Margin="0,5,0,0">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto"></ColumnDefinition>
+								<ColumnDefinition Width="*"></ColumnDefinition>
+							</Grid.ColumnDefinitions>
+							<Border Grid.Column="0" BorderBrush="#FF2C66A1" BorderThickness="5" CornerRadius="7" Margin="5">
 								<Image Width="80" MinHeight="80" Source="{Binding Path=ImageUrl}" />
 							</Border>
-							<TextBlock Margin="5,0,0,0" TextWrapping="NoWrap" Text="{Binding Path=Title}" VerticalAlignment="Center" FontSize="24" />
-						</StackPanel>
+							<TextBlock Grid.Column="1" Margin="5,0,0,0" TextWrapping="Wrap" Text="{Binding Path=Title}" VerticalAlignment="Center" FontSize="24" />
+						</Grid>
 					</DataTemplate>
 				</ListBox.ItemTemplate>
 			</ListBox>
