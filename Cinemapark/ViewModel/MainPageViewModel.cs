@@ -153,6 +153,7 @@ namespace Cinemapark.ViewModel
 
 		public void LoadMovies()
 		{
+			Movies.Clear();
 			var client = new WebClient();
 			client.DownloadStringCompleted += GetMoviesCompleted;
 			var path = string.Format(Movie.MoviesUri, _appSettings.Multiplex.MultiplexId);
@@ -182,7 +183,6 @@ namespace Cinemapark.ViewModel
 							             MultiplexId = multiplexId
 						             }).ToList();
 
-					Movies.Clear();
 					foreach (var movie in items)
 					{
 						Movies.Add(movie);

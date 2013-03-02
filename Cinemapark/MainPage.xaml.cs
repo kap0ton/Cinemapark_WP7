@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
@@ -44,11 +45,12 @@ namespace Cinemapark
 			var movie = MovieListBox.SelectedItem as Movie;
 			if(movie!=null)
 			{
-				NavigationService.Navigate(new Uri("/View/MovieDetails.xaml?id=" + movie.MovieId, UriKind.Relative));
+				var movieTitle = HttpUtility.UrlEncode(movie.Title);
+				var url = string.Format("/View/MovieDetailsView.xaml?id={0}&title={1}", movie.MovieId, movieTitle);
+				NavigationService.Navigate(new Uri(url, UriKind.Relative));
 			}
 		}
 
-		//save results after reservation a place
 		private void MainPage_OnLoaded(object sender, RoutedEventArgs e)
 		{
 			ApplicationBar = new ApplicationBar();

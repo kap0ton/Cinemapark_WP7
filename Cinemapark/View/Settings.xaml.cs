@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Navigation;
 using Cinemapark.Resources;
 using Cinemapark.ViewModel;
 using Microsoft.Phone.Shell;
@@ -17,7 +18,7 @@ namespace Cinemapark.View
 			DataContext = _settingsViewModel;
 		}
 
-		protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+		protected override void OnNavigatedTo(NavigationEventArgs e)
 		{
 			base.OnNavigatedTo(e);
 			_settingsViewModel.LoadMultiplexes();

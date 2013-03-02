@@ -6,8 +6,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
-    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls" 
-    x:Class="Cinemapark.View.MovieDetails"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+    x:Class="Cinemapark.View.MovieDetailsView"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -25,21 +25,71 @@
 		<!--TitlePanel contains the name of the application and page title-->
 		<StackPanel x:Name="TitlePanel" Grid.Row="0" Style="{StaticResource TitlePanelStyle}">
 			<TextBlock x:Name="ApplicationTitle" Text="{Binding Multiplex.FullName}" Style="{StaticResource PhoneTextNormalStyle}"/>
-			<!--<TextBlock x:Name="PageTitle" Text="schedule" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>-->
+			<TextBlock Text="{Binding Path=MovieDetails.Title}" Style="{StaticResource PhoneTextNormalStyle}"/>
 		</StackPanel>
 
-		<controls:Pivot Grid.Row="1" Title="">
+		<!--ContentPanel - place additional content here-->
+		<controls:Pivot Grid.Row="1" Title="" Margin="0, -40, 0, 0">
 			<controls:PivotItem Header="{Binding Path=AppResources.Poster, Source={StaticResource LocalizedStrings}}">
 				<Grid>
-					<Image Source="{Binding ImageUrl}" Margin="10,0,10,10"/>
+					<Image Source="{Binding Path=ImageUrl}" Margin="10,0,10,10"/>
 				</Grid>
 			</controls:PivotItem>
-			<controls:PivotItem Header="{Binding Path=AppResources.Schedule, Source={StaticResource LocalizedStrings}}">
-				<!--ContentPanel - place additional content here-->
-				<Grid Grid.Row="1" Margin="12,0,12,0">
+			<controls:PivotItem Header="{Binding Path=AppResources.Details, Source={StaticResource LocalizedStrings}}">
+				<ScrollViewer>
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto"></RowDefinition>
+							<RowDefinition Height="Auto"></RowDefinition>
+							<RowDefinition Height="Auto"></RowDefinition>
+							<RowDefinition Height="Auto"></RowDefinition>
+							<RowDefinition Height="Auto"></RowDefinition>
+							<RowDefinition Height="*"></RowDefinition>
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="Auto"></ColumnDefinition>
+							<ColumnDefinition Width="*"></ColumnDefinition>
+						</Grid.ColumnDefinitions>
 
+						<TextBlock Grid.Row="0" Grid.Column="0" Foreground="#b8cbde">
+							<Run Text="{Binding Path=AppResources.Title, Source={StaticResource LocalizedStrings}}"></Run>
+							<Run Text=": "></Run>
+						</TextBlock>
+						<TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path=MovieDetails.Title}" TextWrapping="Wrap" Foreground="#ffffff"></TextBlock>
+
+						<TextBlock Grid.Row="1" Grid.Column="0" Text="Original Title: " Foreground="#b8cbde"></TextBlock>
+						<TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Path=MovieDetails.TitleOriginal}" TextWrapping="Wrap" Foreground="#ffffff"></TextBlock>
+
+						<TextBlock Grid.Row="2" Grid.Column="0" Text="Runtime: " Foreground="#b8cbde"></TextBlock>
+						<TextBlock Grid.Row="2" Grid.Column="1" TextWrapping="Wrap" Foreground="#ffffff">
+							<Run Text="{Binding Path=MovieDetails.Duration}"></Run>
+							<Run Text="{Binding Path=AppResources.Minutes, Source={StaticResource LocalizedStrings}}"></Run>
+						</TextBlock>
+
+						<TextBlock Grid.Row="3" Grid.Column="0" Foreground="#b8cbde">
+							<Run Text="{Binding Path=AppResources.Genre, Source={StaticResource LocalizedStrings}}"></Run>
+							<Run Text=": "></Run>
+						</TextBlock>
+						<TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Path=MovieDetails.Genres}" TextWrapping="Wrap" Foreground="#ffffff"></TextBlock>
+
+						<TextBlock Grid.Row="4" Grid.Column="0" Foreground="#b8cbde">
+							<Run Text="{Binding Path=AppResources.Actors, Source={StaticResource LocalizedStrings}}"></Run>
+							<Run Text=": "></Run>
+						</TextBlock>
+						<TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Path=MovieDetails.Actors}" TextWrapping="Wrap" Foreground="#ffffff"></TextBlock>
+
+						<TextBlock Grid.Row="5" Grid.Column="0" Foreground="#b8cbde">
+							<Run Text="{Binding Path=AppResources.Description, Source={StaticResource LocalizedStrings}}"></Run>
+							<Run Text=": "></Run>
+						</TextBlock>
+						<TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding Path=MovieDetails.Description}" TextWrapping="Wrap" Foreground="#ffffff"></TextBlock>
+					</Grid>
+				</ScrollViewer>
+			</controls:PivotItem>
+			<controls:PivotItem Header="{Binding Path=AppResources.Schedule, Source={StaticResource LocalizedStrings}}">
+				<Grid Grid.Row="1" Margin="12,0,12,0">
 					<ScrollViewer>
-						<ItemsControl ItemsSource="{Binding Schedules}">
+						<ItemsControl ItemsSource="{Binding Path=Schedules}">
 							<ItemsControl.ItemTemplate>
 								<DataTemplate >
 									<StackPanel Margin="0,15,0,3">
@@ -56,7 +106,7 @@
 															<Run Text="{Binding Path=AppResources.Hall, Source={StaticResource LocalizedStrings}}"></Run>
 															<Run Text="{Binding Path=HallId}"></Run>
 														</TextBlock>
-														<ItemsControl Grid.Column="1" ItemsSource="{Binding Sessions}">
+														<ItemsControl Grid.Column="1" ItemsSource="{Binding Path=Sessions}">
 															<ItemsControl.ItemsPanel>
 																<ItemsPanelTemplate>
 																	<toolkit:WrapPanel />

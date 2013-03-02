@@ -1,17 +1,19 @@
 ﻿using System;
+using System.Net;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Navigation;
 using Cinemapark.Model;
 using Cinemapark.ViewModel;
 using Microsoft.Phone.Tasks;
 
 namespace Cinemapark.View
 {
-	public partial class MovieDetails
+	public partial class MovieDetailsView
 	{
 		private readonly MovieDetailsViewModel _movieDetailsViewModel;
 
-		public MovieDetails()
+		public MovieDetailsView()
 		{
 			InitializeComponent();
 
@@ -19,14 +21,17 @@ namespace Cinemapark.View
 			DataContext = _movieDetailsViewModel;
 		}
 
-		protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+		protected override void OnNavigatedTo(NavigationEventArgs e)
 		{
 			base.OnNavigatedTo(e);
 			string idStr;
-			if (NavigationContext.QueryString.TryGetValue("id", out idStr))
+			string titleStr;
+			if (NavigationContext.QueryString.TryGetValue("id", out idStr)
+				&& NavigationContext.QueryString.TryGetValue("title", out titleStr))
 			{
-				int id = int.Parse(idStr);
-				_movieDetailsViewModel.Load(id);
+				var id = int.Parse(idStr);
+				var title = HttpUtility.UrlDecode(titleStr);
+				_movieDetailsViewModel.Load(id, title);
 			}
 		}
 
