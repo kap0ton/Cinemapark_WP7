@@ -97,15 +97,15 @@ namespace Cinemapark.ViewModel
 				else
 				{
 					TextReader textReader = new StringReader(e.Result);
-					XDocument xDocument = XDocument.Load(textReader);
+					var xElement = XElement.Load(textReader);
 
-					var items = (from item in xDocument.Root.Descendants("item")
-								 select new Multiplex
-								 {
-									 City = item.Attribute("city").Value,
-									 Title = item.Attribute("title").Value,
-									 MultiplexId = Int32.Parse(item.Attribute("id").Value)
-								 }).ToList().OrderBy(x => x.City).ThenBy(y => y.Title);
+					var items = (from item in xElement.Descendants("item")
+					             select new Multiplex
+						             {
+							             City = item.GetAttributeOrDefault("city"),
+							             Title = item.GetAttributeOrDefault("title"),
+							             MultiplexId = item.GetAttributeIntOrDefault("id")
+						             }).ToList().OrderBy(x => x.City).ThenBy(y => y.Title);
 
 					var m = items.FirstOrDefault(x => x.MultiplexId == Multiplex.DefaultMultiplexId);
 					Multiplex = m ?? items.FirstOrDefault();
@@ -172,15 +172,15 @@ namespace Cinemapark.ViewModel
 					var multiplexId = _appSettings.Multiplex.MultiplexId;
 
 					TextReader textReader = new StringReader(e.Result);
-					XDocument xDocument = XDocument.Load(textReader);
+					var xElement = XElement.Load(textReader);
 
-					var items = (from item in xDocument.Root.Descendants("item")
+					var items = (from item in xElement.Descendants("item")
 					             select new Movie
-					                    	{
-					                    		Title = item.Attribute("title").Value,
-					                    		MovieId = Int32.Parse(item.Attribute("id").Value),
-					                    		MultiplexId = multiplexId
-					                    	}).ToList();
+						             {
+							             Title = item.GetAttributeOrDefault("title"),
+							             MovieId = item.GetAttributeIntOrDefault("id"),
+							             MultiplexId = multiplexId
+						             }).ToList();
 
 					Movies.Clear();
 					foreach (var movie in items)

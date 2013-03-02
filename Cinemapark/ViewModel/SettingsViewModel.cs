@@ -91,15 +91,15 @@ namespace Cinemapark.ViewModel
 				else
 				{
 					TextReader textReader = new StringReader(e.Result);
-					XDocument xDocument = XDocument.Load(textReader);
+					var xElement = XElement.Load(textReader);
 
-					var items = (from item in xDocument.Root.Descendants("item")
+					var items = (from item in xElement.Descendants("item")
 					             select new Multiplex
-					                    	{
-					                    		City = item.Attribute("city").Value,
-					                    		Title = item.Attribute("title").Value,
-					                    		MultiplexId = Int32.Parse(item.Attribute("id").Value)
-					                    	}).ToList().OrderBy(x=>x.City).ThenBy(y=>y.Title);
+						             {
+							             City = item.GetAttributeOrDefault("city"),
+							             Title = item.GetAttributeOrDefault("title"),
+							             MultiplexId = item.GetAttributeIntOrDefault("id")
+						             }).ToList().OrderBy(x => x.City).ThenBy(y => y.Title);
 
 					Multiplexes.Clear();
 					foreach (var multiplex in items)
