@@ -100,7 +100,7 @@ namespace Cinemapark.ViewModel
 		{
 			var client = new WebClient();
 			client.DownloadStringCompleted += GetMoviesCompleted;
-			var path = string.Format(Movie.MovieUri, _appSettings.Multiplex.MultiplexId);
+			var path = string.Format(Movie.MoviesUri, _appSettings.Multiplex.MultiplexId);
 			client.DownloadStringAsync(new Uri(path, UriKind.Absolute));
 		}
 

@@ -52,7 +52,10 @@
 															<ColumnDefinition Width="Auto" />
 															<ColumnDefinition Width="*" />
 														</Grid.ColumnDefinitions>
-														<TextBlock Grid.Column="0" Margin="0,5,0,0" Text="{Binding HallName}" />
+														<TextBlock Grid.Column="0" Margin="0,5,0,0">
+															<Run Text="{Binding Path=AppResources.Hall, Source={StaticResource LocalizedStrings}}"></Run>
+															<Run Text="{Binding Path=HallId}"></Run>
+														</TextBlock>
 														<ItemsControl Grid.Column="1" ItemsSource="{Binding Sessions}">
 															<ItemsControl.ItemsPanel>
 																<ItemsPanelTemplate>
