@@ -71,6 +71,8 @@ namespace Cinemapark.ViewModel
 
 		#endregion
 
+		#region Load
+
 		public void Load(int movieId)
 		{
 			Multiplex = _appSettings.Multiplex;
@@ -78,6 +80,10 @@ namespace Cinemapark.ViewModel
 
 			LoadSchedule(movieId);
 		}
+
+		#endregion
+
+		#region Load Schedule
 
 		private void LoadSchedule(int movieId)
 		{
@@ -130,5 +136,7 @@ namespace Cinemapark.ViewModel
 				MessageBox.Show(ex.Message);
 			}
 		}
+
+		#endregion
 	}
 }
