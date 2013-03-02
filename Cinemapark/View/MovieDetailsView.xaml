@@ -57,10 +57,16 @@
 						</TextBlock>
 						<TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path=MovieDetails.Title}" TextWrapping="Wrap" Foreground="#ffffff"></TextBlock>
 
-						<TextBlock Grid.Row="1" Grid.Column="0" Text="Original Title: " Foreground="#b8cbde"></TextBlock>
+						<TextBlock Grid.Row="1" Grid.Column="0" Foreground="#b8cbde">
+							<Run Text="{Binding Path=AppResources.OriginalTitle, Source={StaticResource LocalizedStrings}}"></Run>
+							<Run Text=": "></Run>
+						</TextBlock>
 						<TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Path=MovieDetails.TitleOriginal}" TextWrapping="Wrap" Foreground="#ffffff"></TextBlock>
 
-						<TextBlock Grid.Row="2" Grid.Column="0" Text="Runtime: " Foreground="#b8cbde"></TextBlock>
+						<TextBlock Grid.Row="2" Grid.Column="0" Foreground="#b8cbde">
+							<Run Text="{Binding Path=AppResources.Runtime, Source={StaticResource LocalizedStrings}}"></Run>
+							<Run Text=": "></Run>
+						</TextBlock>
 						<TextBlock Grid.Row="2" Grid.Column="1" TextWrapping="Wrap" Foreground="#ffffff">
 							<Run Text="{Binding Path=MovieDetails.Duration}"></Run>
 							<Run Text="{Binding Path=AppResources.Minutes, Source={StaticResource LocalizedStrings}}"></Run>

@@ -144,11 +144,17 @@
   <data name="Multiplexes" xml:space="preserve">
     <value>кинотеатры</value>
   </data>
+  <data name="OriginalTitle" xml:space="preserve">
+    <value>ориг.</value>
+  </data>
   <data name="Poster" xml:space="preserve">
     <value>постер</value>
   </data>
   <data name="RefreshBtn" xml:space="preserve">
     <value>обновить</value>
+  </data>
+  <data name="Runtime" xml:space="preserve">
+    <value>длит.</value>
   </data>
   <data name="SaveBtn" xml:space="preserve">
     <value>сохранить</value>

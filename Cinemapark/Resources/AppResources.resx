@@ -144,11 +144,17 @@
   <data name="Multiplexes" xml:space="preserve">
     <value>multiplexes</value>
   </data>
+  <data name="OriginalTitle" xml:space="preserve">
+    <value>orig. title</value>
+  </data>
   <data name="Poster" xml:space="preserve">
     <value>poster</value>
   </data>
   <data name="RefreshBtn" xml:space="preserve">
     <value>refresh</value>
+  </data>
+  <data name="Runtime" xml:space="preserve">
+    <value>runtime</value>
   </data>
   <data name="SaveBtn" xml:space="preserve">
     <value>save</value>

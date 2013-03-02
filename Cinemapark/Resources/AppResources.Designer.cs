@@ -142,6 +142,15 @@ namespace Cinemapark.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to orig. title.
+        /// </summary>
+        public static string OriginalTitle {
+            get {
+                return ResourceManager.GetString("OriginalTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to poster.
         /// </summary>
         public static string Poster {
@@ -156,6 +165,15 @@ namespace Cinemapark.Resources {
         public static string RefreshBtn {
             get {
                 return ResourceManager.GetString("RefreshBtn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to runtime.
+        /// </summary>
+        public static string Runtime {
+            get {
+                return ResourceManager.GetString("Runtime", resourceCulture);
             }
         }
         
