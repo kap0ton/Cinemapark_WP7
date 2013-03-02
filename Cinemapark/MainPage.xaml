@@ -47,15 +47,5 @@
 				</ListBox.ItemTemplate>
 			</ListBox>
 		</Grid>
-		
 	</Grid>
-
-	<!--Sample code showing usage of ApplicationBar-->
-	<!--<phone:PhoneApplicationPage.ApplicationBar>
-		<shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Mode="Default">
-			<shell:ApplicationBarIconButton x:Name="RefreshBarIconButton" IconUri="/icons/appbar.refresh.rest.png" Text="refresh" Click="RefreshBarIconButton_OnClick" />
-			<shell:ApplicationBarIconButton x:Name="SettingsBarIconButton" IconUri="/icons/appbar.feature.settings.rest.png" Text="settings" Click="SettingsBarIconButton_OnClick" />
-		</shell:ApplicationBar>
-	</phone:PhoneApplicationPage.ApplicationBar>-->
-
 </phone:PhoneApplicationPage>

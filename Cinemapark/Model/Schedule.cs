@@ -26,7 +26,7 @@ namespace Cinemapark.Model
 		/// <summary>
 		/// {0} - multiplex id, {1} - session id
 		/// </summary>
-		public const string Booking = "http://booking.www.cinemapark.ru/start/{0}/{1}/";
+		public const string BookingUrl = "http://booking.www.cinemapark.ru/start/{0}/{1}/";
 
 		public int Id { get; set; }
 

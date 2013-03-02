@@ -33,12 +33,13 @@ namespace Cinemapark.View
 		private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
 		{
 			var hyperlynk = sender as HyperlinkButton;
-			if(hyperlynk!=null)
+			if (hyperlynk != null)
 			{
 				var task = new WebBrowserTask
-				           	{
-				           		Uri = new Uri(string.Format(Session.Booking, _movieDetailsViewModel.Multiplex.MultiplexId, hyperlynk.Tag), UriKind.Absolute)
-				           	};
+					{
+						Uri =
+							new Uri(string.Format(Session.BookingUrl, _movieDetailsViewModel.Multiplex.MultiplexId, hyperlynk.Tag), UriKind.Absolute)
+					};
 				task.Show();
 			}
 		}
