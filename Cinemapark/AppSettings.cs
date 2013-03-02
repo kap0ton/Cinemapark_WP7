@@ -5,20 +5,12 @@ namespace Cinemapark
 {
 	public class AppSettings
 	{
-		#region Properties
-
 		private readonly IsolatedStorageSettings _settings;
-
-		#endregion
-
-		#region .ctor
 
 		public AppSettings()
 		{
 			_settings = IsolatedStorageSettings.ApplicationSettings;
 		}
-
-		#endregion
 
 		#region Helper methods
 
@@ -92,7 +84,7 @@ namespace Cinemapark
 		/// </summary>
 		public Language Language
 		{
-			get { return GetValueOrDefault(LanguageKey, Language.None); }
+			get { return GetValueOrDefault(LanguageKey, Language.English); }
 			set
 			{
 				if(AddOrUpdateValue(LanguageKey, value))
