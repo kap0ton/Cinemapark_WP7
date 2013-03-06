@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -89,9 +90,7 @@ namespace Cinemapark.ViewModel
 		public void Load(int movieId, string title)
 		{
 			Multiplex = _appSettings.Multiplex;
-			ImageUrl = new Uri(string.Format(Movie.PosterUri, movieId), UriKind.Absolute);
-
-			MovieDetails = new MovieDetails {Title = title};
+			MovieDetails = new MovieDetails {MovieId = movieId, Title = title};
 			GetKinopoiskDetails();
 			LoadSchedule(movieId);
 		}

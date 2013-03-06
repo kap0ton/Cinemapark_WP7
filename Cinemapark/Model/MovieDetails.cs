@@ -3,23 +3,14 @@ using Cinemapark.Annotations;
 
 namespace Cinemapark.Model
 {
-	public class MovieDetails : INotifyPropertyChanged
+	public class MovieDetails : Movie, INotifyPropertyChanged
 	{
+		#region Properties
+
 		/// <summary>
 		/// {0} - Movie title
 		/// </summary>
 		public const string MovieDetailsUri = "http://kinoinfo.ru/api/film/?name={0}";
-
-		private string _title;
-		public string Title
-		{
-			get { return _title; }
-			set
-			{
-				_title = value;
-				OnPropertyChanged("Title");
-			}
-		}
 
 		private string _titleOriginal;
 		public string TitleOriginal
@@ -76,10 +67,16 @@ namespace Cinemapark.Model
 			}
 		}
 
+		#endregion
+
+		#region .ctor
+
 		public MovieDetails()
 		{
 			Duration = "0";
 		}
+
+		#endregion
 
 		#region INotifyPropertyChanged
 

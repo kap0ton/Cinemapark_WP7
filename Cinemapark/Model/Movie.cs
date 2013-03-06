@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 namespace Cinemapark.Model
 {
@@ -24,7 +25,12 @@ namespace Cinemapark.Model
 
 		public Uri ImageUrl
 		{
-			get { return new Uri(string.Format(PosterUri, MovieId), UriKind.Absolute); }
+			get
+			{
+				return new Uri(
+					string.Format(PosterUri, MovieId.ToString(CultureInfo.InvariantCulture).Substring(0, 4)),
+					UriKind.Absolute);
+			}
 		}
 	}
 }
