@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -123,7 +122,7 @@ namespace Cinemapark.ViewModel
 					var movie = xDocument.Descendants("film").FirstOrDefault();
 					if (movie != null)
 					{
-						MovieDetails.TitleOriginal = movie.GetAttributeOrDefault("original");
+						MovieDetails.TitleOriginal = HttpUtility.HtmlDecode(movie.GetAttributeOrDefault("original"));
 
 						var duration = movie.Elements().FirstOrDefault(x => x.Name == "runtime");
 						if (duration != null)
