@@ -24,15 +24,15 @@
 
 		<!--TitlePanel contains the name of the application and page title-->
 		<StackPanel x:Name="TitlePanel" Grid.Row="0" Style="{StaticResource TitlePanelStyle}">
-			<TextBlock x:Name="ApplicationTitle" Text="{Binding Multiplex.FullName}" Style="{StaticResource PhoneTextNormalStyle}"/>
-			<TextBlock Text="{Binding Path=MovieDetails.Title}" Style="{StaticResource PhoneTextNormalStyle}"/>
+			<TextBlock x:Name="MultiplexTitle" Text="{Binding Multiplex.FullName}" Style="{StaticResource PhoneTextNormalStyle}"/>
+			<TextBlock x:Name="MovieTitle" Text="{Binding Path=MovieDetails.Title}" Style="{StaticResource PhoneTextNormalStyle}"/>
 		</StackPanel>
 
 		<!--ContentPanel - place additional content here-->
 		<controls:Pivot Grid.Row="1" Title="" Margin="0, -40, 0, 0">
 			<controls:PivotItem Header="{Binding Path=AppResources.Poster, Source={StaticResource LocalizedStrings}}">
 				<Grid>
-					<Image Source="{Binding Path=MovieDetails.ImageUrl}" Margin="10,0,10,10"/>
+					<Image Source="{Binding Path=MovieDetails.ImageUrl}" Margin="10,0,10,10" />
 				</Grid>
 			</controls:PivotItem>
 			<controls:PivotItem Header="{Binding Path=AppResources.Details, Source={StaticResource LocalizedStrings}}">

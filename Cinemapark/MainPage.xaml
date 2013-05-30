@@ -23,7 +23,7 @@
 
 		<!--TitlePanel contains the name of the application and page title-->
 		<StackPanel x:Name="TitlePanel" Grid.Row="0" Style="{StaticResource TitlePanelStyle}">
-			<TextBlock x:Name="ApplicationTitle" Text="{Binding Path=Multiplex.FullName}" Style="{StaticResource PhoneTextNormalStyle}"/>
+			<TextBlock x:Name="MultiplexTitle" Text="{Binding Path=Multiplex.FullName}" Style="{StaticResource PhoneTextNormalStyle}"/>
 			<TextBlock x:Name="PageTitle" Text="{Binding Path=AppResources.Movies, Source={StaticResource LocalizedStrings}}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
 		</StackPanel>
 

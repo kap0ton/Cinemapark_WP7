@@ -10,7 +10,10 @@ namespace Cinemapark.Model
 		/// </summary>
 		public const string MoviesUri = "http://www.cinemapark.ru/gadgets/data/movies/{0}/";
 
-		//private const string PosterUri = "http://www.cinemapark.ru/img/poster_large/{0}.jpg"; //{0} - movie id
+		/// <summary>
+		///  //{0} - multiplex id, {1} - booking numper
+		/// </summary>
+		public const string BookinInfoUri = "http://booking.www.cinemapark.ru/info/18/449355/";
 
 		/// <summary>
 		/// {0} - movie id

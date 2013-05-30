@@ -28,7 +28,7 @@
 		
 		<!--TitlePanel contains the name of the application and page title-->
 		<StackPanel x:Name="TitlePanel" Grid.Row="0" Style="{StaticResource TitlePanelStyle}">
-			<TextBlock x:Name="ApplicationTitle" Text="{Binding Path=AppResources.Settings, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}"/>
+			<TextBlock x:Name="PageTitle" Text="{Binding Path=AppResources.Settings, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}"/>
 		</StackPanel>
 
 		<!--ContentPanel - place additional content here-->
