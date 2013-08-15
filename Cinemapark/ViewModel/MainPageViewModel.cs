@@ -8,6 +8,7 @@ using System.Net;
 using System.Threading;
 using System.Windows;
 using System.Xml.Linq;
+using Cinemapark.Annotations;
 using Cinemapark.Model;
 using Cinemapark.Resources;
 
@@ -34,6 +35,28 @@ namespace Cinemapark.ViewModel
 			get { return _movies; }
 		}
 
+		private bool _progressBarIsIndeterminate;
+		public bool ProgressBarIsIndeterminate
+		{
+			get { return _progressBarIsIndeterminate; }
+			set
+			{
+				_progressBarIsIndeterminate = value;
+				NotifyPropertyChanged("ProgressBarIsIndeterminate");
+			}
+		}
+
+		private Visibility _progressBarVisibility;
+		public Visibility ProgressBarVisibility
+		{
+			get { return _progressBarVisibility; }
+			set
+			{
+				_progressBarVisibility = value;
+				NotifyPropertyChanged("ProgressBarVisibility");
+			}
+		}
+
 		private readonly AppSettings _appSettings;
 
 		#endregion
@@ -41,7 +64,8 @@ namespace Cinemapark.ViewModel
 		#region INotifyPropertyChanged Members
 
 		public event PropertyChangedEventHandler PropertyChanged;
-		
+
+		[NotifyPropertyChangedInvocator]
 		private void NotifyPropertyChanged(string propertyName)
 		{
 			var handler = PropertyChanged;
@@ -59,6 +83,8 @@ namespace Cinemapark.ViewModel
 		{
 			_appSettings = new AppSettings();
 			_movies = new ObservableCollection<Movie>();
+			ProgressBarIsIndeterminate = false;
+			ProgressBarVisibility = Visibility.Collapsed;
 		}
 
 		#endregion
@@ -67,6 +93,7 @@ namespace Cinemapark.ViewModel
 
 		public void Load()
 		{
+			UpdateProgressBar(true);
 			SetMultiplex();
 			SetLanguage();
 		}
@@ -153,6 +180,7 @@ namespace Cinemapark.ViewModel
 
 		public void LoadMovies()
 		{
+			UpdateProgressBar(true);
 			Movies.Clear();
 			var client = new WebClient();
 			client.DownloadStringCompleted += GetMoviesCompleted;
@@ -192,6 +220,28 @@ namespace Cinemapark.ViewModel
 			catch (Exception ex)
 			{
 				MessageBox.Show(ex.Message);
+			}
+			finally
+			{
+				UpdateProgressBar(false);
+			}
+		}
+
+		#endregion
+
+		#region Helper Methods
+
+		private void UpdateProgressBar(bool isEnabled)
+		{
+			if (isEnabled)
+			{
+				ProgressBarIsIndeterminate = true;
+				ProgressBarVisibility = Visibility.Visible;
+			}
+			else
+			{
+				ProgressBarIsIndeterminate = false;
+				ProgressBarVisibility = Visibility.Collapsed;
 			}
 		}
 

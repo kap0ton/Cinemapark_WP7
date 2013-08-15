@@ -22,6 +22,14 @@
 			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
 
+		<ProgressBar Margin="0,5,0,0"
+			x:Name="CustomIndeterminateProgressBar" 
+			IsIndeterminate="{Binding Path=ProgressBarIsIndeterminate}"
+			Visibility="{Binding Path=ProgressBarVisibility}"
+			Style="{StaticResource CustomIndeterminateProgressBar}"
+			VerticalAlignment="Top"
+		/>
+		
 		<!--TitlePanel contains the name of the application and page title-->
 		<StackPanel x:Name="TitlePanel" Grid.Row="0" Style="{StaticResource TitlePanelStyle}">
 			<TextBlock x:Name="MultiplexTitle" Text="{Binding Path=Multiplex.FullName}" Style="{StaticResource PhoneTextNormalStyle}"/>
