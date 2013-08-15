@@ -46,59 +46,59 @@
 				<Grid Grid.Row="1" Margin="12,0,12,0">
 					<ScrollViewer>
 						<StackPanel>
-						<ItemsControl ItemsSource="{Binding Path=Schedules}">
-							<ItemsControl.ItemTemplate>
-								<DataTemplate >
-									<StackPanel Margin="0,15,0,3">
-										<TextBlock Text="{Binding Path=Date}"  Margin="70,0,0,0" FontWeight="Bold" FontSize="22" TextDecorations="Underline" />
-										<ItemsControl ItemsSource="{Binding Path=Halls}">
-											<ItemsControl.Resources>
-												<DataTemplate x:Key="HallDataTemplate">
-													<Grid d:DataContext="{d:DesignInstance model:Hall}">
-														<Grid.ColumnDefinitions>
-															<ColumnDefinition Width="Auto" />
-															<ColumnDefinition Width="*" />
-														</Grid.ColumnDefinitions>
-														<TextBlock Grid.Column="0" Margin="0,5,0,0">
-															<Run Text="{Binding Path=AppResources.Hall, Source={StaticResource LocalizedStrings}}"></Run>
-															<Run Text="{Binding Path=HallId}"></Run>
-														</TextBlock>
-														<ItemsControl Grid.Column="1" ItemsSource="{Binding Path=Sessions}">
-															<ItemsControl.ItemsPanel>
-																<ItemsPanelTemplate>
-																	<toolkit:WrapPanel />
-																</ItemsPanelTemplate>
-															</ItemsControl.ItemsPanel>
-															<ItemsControl.ItemTemplate>
-																<DataTemplate>
-																	<StackPanel Margin="10,5,5,0">
-																		<HyperlinkButton Content="{Binding Time}" Tag="{Binding Id}" Click="ButtonBase_OnClick" >
-																			<HyperlinkButton.ContentTemplate>
-																				<DataTemplate>
-																					<TextBlock Text="{Binding}" />
-																				</DataTemplate>
-																			</HyperlinkButton.ContentTemplate>
-																		</HyperlinkButton>
-																		<Line StrokeThickness="4" Width="50" HorizontalAlignment="Center" Stretch="UniformToFill"
-																Stroke="{Binding Price, Converter={StaticResource PriceColorConverter}}" Height="10" X1="0" Y1="0" X2="1" Y2="0"/>
-																	</StackPanel>
-																</DataTemplate>
-															</ItemsControl.ItemTemplate>
-														</ItemsControl>
-													</Grid>
-												</DataTemplate>
-											</ItemsControl.Resources>
-											<ItemsControl.ItemTemplate>
-												<StaticResource ResourceKey="HallDataTemplate"/>
-											</ItemsControl.ItemTemplate>
-										</ItemsControl>
-									</StackPanel>
-								</DataTemplate>
-							</ItemsControl.ItemTemplate>
-						</ItemsControl>
+							<ItemsControl ItemsSource="{Binding Path=Schedules}">
+								<ItemsControl.ItemTemplate>
+									<DataTemplate >
+										<StackPanel Margin="0,15,0,3">
+											<TextBlock Text="{Binding Path=Date}"  Margin="70,0,0,0" FontWeight="Bold" FontSize="22" TextDecorations="Underline" />
+											<ItemsControl ItemsSource="{Binding Path=Halls}">
+												<ItemsControl.Resources>
+													<DataTemplate x:Key="HallDataTemplate">
+														<Grid d:DataContext="{d:DesignInstance model:Hall}">
+															<Grid.ColumnDefinitions>
+																<ColumnDefinition Width="Auto" />
+																<ColumnDefinition Width="*" />
+															</Grid.ColumnDefinitions>
+															<TextBlock Grid.Column="0" Margin="0,5,0,0">
+																<Run Text="{Binding Path=AppResources.Hall, Source={StaticResource LocalizedStrings}}"></Run>
+																<Run Text="{Binding Path=HallId}"></Run>
+															</TextBlock>
+															<ItemsControl Grid.Column="1" ItemsSource="{Binding Path=Sessions}">
+																<ItemsControl.ItemsPanel>
+																	<ItemsPanelTemplate>
+																		<toolkit:WrapPanel />
+																	</ItemsPanelTemplate>
+																</ItemsControl.ItemsPanel>
+																<ItemsControl.ItemTemplate>
+																	<DataTemplate>
+																		<StackPanel Margin="10,5,5,0">
+																			<HyperlinkButton Content="{Binding Time}" Tag="{Binding Id}" Click="ButtonBase_OnClick" >
+																				<HyperlinkButton.ContentTemplate>
+																					<DataTemplate>
+																						<TextBlock Text="{Binding}" />
+																					</DataTemplate>
+																				</HyperlinkButton.ContentTemplate>
+																			</HyperlinkButton>
+																			<Line StrokeThickness="4" Width="50" HorizontalAlignment="Center" Stretch="UniformToFill"
+																	Stroke="{Binding Price, Converter={StaticResource PriceColorConverter}}" Height="10" X1="0" Y1="0" X2="1" Y2="0"/>
+																		</StackPanel>
+																	</DataTemplate>
+																</ItemsControl.ItemTemplate>
+															</ItemsControl>
+														</Grid>
+													</DataTemplate>
+												</ItemsControl.Resources>
+												<ItemsControl.ItemTemplate>
+													<StaticResource ResourceKey="HallDataTemplate"/>
+												</ItemsControl.ItemTemplate>
+											</ItemsControl>
+										</StackPanel>
+									</DataTemplate>
+								</ItemsControl.ItemTemplate>
+							</ItemsControl>
 
+							<!-- Price Legend -->
 							<TextBlock Text="Legend" Margin="0,10,0,0"></TextBlock>
-
 							<Grid>
 								<Grid.ColumnDefinitions>
 									<ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -111,16 +111,19 @@
 								</Grid.RowDefinitions>
 
 								<Line Grid.Row="0" Grid.Column="0" StrokeThickness="4" Width="50" HorizontalAlignment="Left" Stretch="UniformToFill"
-																Stroke="Red" Height="10" X1="0" Y1="0" X2="1" Y2="0"/>
-								<TextBlock Grid.Row="0" Grid.Column="1">more than 500 rub</TextBlock>
+									Stroke="Red" Height="10" X1="0" Y1="0" X2="1" Y2="0"/>
+								<TextBlock Grid.Row="0" Grid.Column="1" Margin="10,0,0,0"
+									Text="{Binding Path=AppResources.RedPrice, Source={StaticResource LocalizedStrings}}" />
 
 								<Line Grid.Row="1" Grid.Column="0" StrokeThickness="4" Width="50" HorizontalAlignment="Left" Stretch="UniformToFill"
-																Stroke="Yellow" Height="10" X1="0" Y1="0" X2="1" Y2="0"/>
-								<TextBlock Grid.Row="1" Grid.Column="1">300-500 rub</TextBlock>
+									Stroke="Yellow" Height="10" X1="0" Y1="0" X2="1" Y2="0"/>
+								<TextBlock Grid.Row="1" Grid.Column="1" Margin="10,0,0,0"
+									Text="{Binding Path=AppResources.YellowPrice, Source={StaticResource LocalizedStrings}}" />
 
 								<Line Grid.Row="2" Grid.Column="0" StrokeThickness="4" Width="50" HorizontalAlignment="Left" Stretch="UniformToFill"
-																Stroke="Green" Height="10" X1="0" Y1="0" X2="1" Y2="0"/>
-								<TextBlock Grid.Row="2" Grid.Column="1"> less than 300 rub</TextBlock>
+									Stroke="Green" Height="10" X1="0" Y1="0" X2="1" Y2="0"/>
+								<TextBlock Grid.Row="2" Grid.Column="1" Margin="10,0,0,0"
+									Text="{Binding Path=AppResources.GreenPrice, Source={StaticResource LocalizedStrings}}" />
 							</Grid>
 						</StackPanel>
 					</ScrollViewer>
