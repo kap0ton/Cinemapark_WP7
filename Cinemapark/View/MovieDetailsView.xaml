@@ -7,13 +7,14 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+    xmlns:viewModel="clr-namespace:Cinemapark.ViewModel" xmlns:model="clr-namespace:Cinemapark.Model"
     x:Class="Cinemapark.View.MovieDetailsView"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="True" d:DataContext="{d:DesignInstance viewModel:MovieDetailsViewModel}">
 
 	<!--LayoutRoot is the root grid where all page content is placed-->
 	<Grid x:Name="LayoutRoot" Style="{StaticResource PageLayoutStyle}">
@@ -103,7 +104,7 @@
 										<ItemsControl ItemsSource="{Binding Path=Halls}">
 											<ItemsControl.Resources>
 												<DataTemplate x:Key="HallDataTemplate">
-													<Grid>
+													<Grid d:DataContext="{d:DesignInstance model:Hall}">
 														<Grid.ColumnDefinitions>
 															<ColumnDefinition Width="Auto" />
 															<ColumnDefinition Width="*" />
