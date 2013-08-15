@@ -21,5 +21,10 @@ namespace Cinemapark.ViewModel
 			}
 			return 0;
 		}
+
+		public static string TrimMovieTitle(this string source)
+		{
+			return source.Replace(" IMAX 2D", "").Replace(" 2D", "").Replace(" IMAX 3D", "").Replace(" 3D", "").Trim();
+		}
 	}
 }

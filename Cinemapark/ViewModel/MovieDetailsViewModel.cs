@@ -102,7 +102,7 @@ namespace Cinemapark.ViewModel
 		{
 			var client = new WebClient();
 			client.DownloadStringCompleted += GetKinopoiskDetailsCompleted;
-			var path = string.Format(MovieDetails.MovieDetailsUri, HttpUtility.UrlEncode(MovieDetails.Title));
+			var path = string.Format(MovieDetails.MovieDetailsUri, HttpUtility.UrlEncode(MovieDetails.Title.TrimMovieTitle()));
 			client.DownloadStringAsync(new Uri(path, UriKind.Absolute));
 		}
 
