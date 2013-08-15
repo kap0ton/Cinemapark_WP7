@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Windows;
 using System.Xml.Linq;
+using Cinemapark.Annotations;
 using Cinemapark.Model;
 
 namespace Cinemapark.ViewModel
@@ -21,7 +22,7 @@ namespace Cinemapark.ViewModel
 			set
 			{
 				_selectedMuliplex = value;
-				NotifyPropertyChanged("SelectedMultiplex");
+				OnPropertyChanged("SelectedMultiplex");
 			}
 		}
 
@@ -32,7 +33,7 @@ namespace Cinemapark.ViewModel
 			set
 			{
 				_selectedLanguage = value;
-				NotifyPropertyChanged("SelectedLanguage");
+				OnPropertyChanged("SelectedLanguage");
 			}
 		}
 
@@ -49,7 +50,9 @@ namespace Cinemapark.ViewModel
 		#region INotifyPropertyChanged Members
 
 		public event PropertyChangedEventHandler PropertyChanged;
-		private void NotifyPropertyChanged(string propertyName)
+
+		[NotifyPropertyChangedInvocator]
+		private void OnPropertyChanged(string propertyName)
 		{
 			var handler = PropertyChanged;
 			if (handler != null)

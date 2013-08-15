@@ -25,7 +25,7 @@ namespace Cinemapark.ViewModel
 			set
 			{
 				_multiplex = value;
-				NotifyPropertyChanged("Multiplex");
+				OnPropertyChanged("Multiplex");
 			}
 		}
 
@@ -42,7 +42,7 @@ namespace Cinemapark.ViewModel
 			set
 			{
 				_progressBarIsIndeterminate = value;
-				NotifyPropertyChanged("ProgressBarIsIndeterminate");
+				OnPropertyChanged("ProgressBarIsIndeterminate");
 			}
 		}
 
@@ -53,7 +53,7 @@ namespace Cinemapark.ViewModel
 			set
 			{
 				_progressBarVisibility = value;
-				NotifyPropertyChanged("ProgressBarVisibility");
+				OnPropertyChanged("ProgressBarVisibility");
 			}
 		}
 
@@ -66,7 +66,7 @@ namespace Cinemapark.ViewModel
 		public event PropertyChangedEventHandler PropertyChanged;
 
 		[NotifyPropertyChangedInvocator]
-		private void NotifyPropertyChanged(string propertyName)
+		private void OnPropertyChanged(string propertyName)
 		{
 			var handler = PropertyChanged;
 			if (handler != null)

@@ -22,7 +22,7 @@ namespace Cinemapark.ViewModel
 			set
 			{
 				_multiplex = value;
-				NotifyPropertyChanged("Multiplex");
+				OnPropertyChanged("Multiplex");
 			}
 		}
 
@@ -39,7 +39,7 @@ namespace Cinemapark.ViewModel
 			set
 			{
 				_imageUrl = value;
-				NotifyPropertyChanged("ImageUrl");
+				OnPropertyChanged("ImageUrl");
 			}
 		}
 
@@ -50,7 +50,7 @@ namespace Cinemapark.ViewModel
 			set
 			{
 				_movieDetails = value;
-				NotifyPropertyChanged("MovieDetails");
+				OnPropertyChanged("MovieDetails");
 			}
 		}
 
@@ -63,7 +63,7 @@ namespace Cinemapark.ViewModel
 		public event PropertyChangedEventHandler PropertyChanged;
 
 		[NotifyPropertyChangedInvocator]
-		private void NotifyPropertyChanged(string propertyName)
+		private void OnPropertyChanged(string propertyName)
 		{
 			var handler = PropertyChanged;
 			if (handler != null)
