@@ -144,6 +144,9 @@
   <data name="Multiplexes" xml:space="preserve">
     <value>multiplexes</value>
   </data>
+  <data name="NoDescription" xml:space="preserve">
+    <value>no description</value>
+  </data>
   <data name="OriginalTitle" xml:space="preserve">
     <value>orig. title</value>
   </data>

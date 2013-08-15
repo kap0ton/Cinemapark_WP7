@@ -1,9 +1,11 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Globalization;
+using Cinemapark.Annotations;
 
 namespace Cinemapark.Model
 {
-	public class Movie
+	public class Movie : INotifyPropertyChanged
 	{
 		/// <summary>
 		/// {0} - multiplex id
@@ -20,7 +22,16 @@ namespace Cinemapark.Model
 		/// </summary>
 		public const string PosterUri = "http://stasis.www.cinemapark.ru/img/film/poster_large/{0}.jpg";
 
-		public string Title { get; set; }
+		private string _title;
+		public string Title
+		{
+			get { return _title; }
+			set
+			{
+				_title = value;
+				OnPropertyChanged("Title");
+			}
+		}
 
 		public int MovieId { get; set; }
 
@@ -34,6 +45,16 @@ namespace Cinemapark.Model
 					string.Format(PosterUri, MovieId.ToString(CultureInfo.InvariantCulture).Substring(0, 4)),
 					UriKind.Absolute);
 			}
+		}
+
+		public event PropertyChangedEventHandler PropertyChanged;
+
+		[NotifyPropertyChangedInvocator]
+		protected virtual void OnPropertyChanged(string propertyName)
+		{
+			var handler = PropertyChanged;
+			if (handler != null)
+				handler(this, new PropertyChangedEventArgs(propertyName));
 		}
 	}
 }

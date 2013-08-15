@@ -93,6 +93,9 @@
     <Compile Include="ViewModel\ExpressionsHelper.cs" />
     <Compile Include="ViewModel\MovieDetailsViewModel.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
+    <Compile Include="View\MovieDetailsControl.xaml.cs">
+      <DependentUpon>MovieDetailsControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MovieDetailsView.xaml.cs">
       <DependentUpon>MovieDetailsView.xaml</DependentUpon>
     </Compile>
@@ -107,6 +110,10 @@
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
     <Page Include="MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MovieDetailsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

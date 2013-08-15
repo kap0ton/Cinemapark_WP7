@@ -149,6 +149,10 @@ namespace Cinemapark.ViewModel
 							MovieDetails.Description = desc.GetAttributeOrDefault("value");
 						}
 					}
+					else
+					{
+						MovieDetails.NoData = true;
+					}
 				}
 			}
 			catch (Exception ex)

@@ -1,9 +1,8 @@
-﻿using System.ComponentModel;
-using Cinemapark.Annotations;
+﻿using System.Windows;
 
 namespace Cinemapark.Model
 {
-	public class MovieDetails : Movie, INotifyPropertyChanged
+	public class MovieDetails : Movie
 	{
 		#region Properties
 
@@ -67,6 +66,28 @@ namespace Cinemapark.Model
 			}
 		}
 
+		private bool _noData;
+		public bool NoData
+		{
+			get { return _noData; }
+			set
+			{
+				_noData = value;
+				OnPropertyChanged("NoData");
+				OnPropertyChanged("SelectedTemplate");
+			}
+		}
+
+		public DataTemplate SelectedTemplate
+		{
+			get
+			{
+				if (NoData)
+					return Application.Current.Resources["DataNotFoundDataTemplate"] as DataTemplate;
+				return Application.Current.Resources["MovieDetailsDataTemplate"] as DataTemplate;
+			}
+		}
+
 		#endregion
 
 		#region .ctor
@@ -74,20 +95,6 @@ namespace Cinemapark.Model
 		public MovieDetails()
 		{
 			Duration = "0";
-		}
-
-		#endregion
-
-		#region INotifyPropertyChanged
-
-		public event PropertyChangedEventHandler PropertyChanged;
-
-		[NotifyPropertyChangedInvocator]
-		protected virtual void OnPropertyChanged(string propertyName)
-		{
-			var handler = PropertyChanged;
-			if (handler != null)
-				handler(this, new PropertyChangedEventArgs(propertyName));
 		}
 
 		#endregion
