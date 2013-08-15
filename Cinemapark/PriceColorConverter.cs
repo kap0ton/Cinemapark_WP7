@@ -15,7 +15,7 @@ namespace Cinemapark
 
 			if (price <= 300)
 				return new SolidColorBrush(Colors.Green);
-			if (price <= 450)
+			if (price <= 500)
 				return new SolidColorBrush(Colors.Yellow);
 			return new SolidColorBrush(Colors.Red);
 		}
