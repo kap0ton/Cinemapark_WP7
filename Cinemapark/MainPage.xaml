@@ -7,6 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModel="clr-namespace:Cinemapark.ViewModel"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
     mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -16,7 +17,7 @@
     shell:SystemTray.IsVisible="True" d:DataContext="{d:DesignInstance viewModel:MainPageViewModel}">
 
 	<!--LayoutRoot is the root grid where all page content is placed-->
-	<Grid x:Name="LayoutRoot" Style="{StaticResource PageLayoutStyle}">
+	<Grid x:Name="LayoutRoot" Style="{StaticResource PageLayoutStyle}" d:DataContext="{d:DesignInstance viewModel:MainPageViewModel }">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="*"/>
@@ -33,28 +34,51 @@
 		<!--TitlePanel contains the name of the application and page title-->
 		<StackPanel x:Name="TitlePanel" Grid.Row="0" Style="{StaticResource TitlePanelStyle}">
 			<TextBlock x:Name="MultiplexTitle" Text="{Binding Path=Multiplex.FullName}" Style="{StaticResource PhoneTextNormalStyle}"/>
-			<TextBlock x:Name="PageTitle" Text="{Binding Path=AppResources.Movies, Source={StaticResource LocalizedStrings}}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
 		</StackPanel>
 
-		<!--ContentPanel - place additional content here-->
-		<Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-			<Image Source="Images/bg_movie.png" Opacity="0.3" Stretch="Uniform" Height="350" />
-			<ListBox x:Name="MovieListBox" ItemsSource="{Binding Path=Movies}" SelectionChanged="MovieListBox_OnSelectionChanged">
-				<ListBox.ItemTemplate>
-					<DataTemplate>
-						<Grid Margin="0,5,0,0">
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="Auto"></ColumnDefinition>
-								<ColumnDefinition Width="*"></ColumnDefinition>
-							</Grid.ColumnDefinitions>
-							<Border Grid.Column="0" BorderBrush="#FF2C66A1" BorderThickness="5" CornerRadius="7" Margin="5">
-								<Image Width="80" MinHeight="80" Source="{Binding Path=ImageUrl}" />
-							</Border>
-							<TextBlock Grid.Column="1" Margin="5,0,0,0" TextWrapping="Wrap" Text="{Binding Path=Title}" VerticalAlignment="Center" FontSize="24" />
-						</Grid>
-					</DataTemplate>
-				</ListBox.ItemTemplate>
-			</ListBox>
-		</Grid>
+		<controls:Pivot Grid.Row="1" Margin="0, -40, 0, 0">
+			<controls:PivotItem Header="{Binding Path=AppResources.Movies, Source={StaticResource LocalizedStrings}}">
+				<Grid x:Name="ContentPanel" Margin="12,0,12,0">
+					<Image Source="Images/bg_movie.png" Opacity="0.3" Stretch="Uniform" Height="350" />
+					<ListBox x:Name="MovieListBox" ItemsSource="{Binding Path=Movies}" SelectionChanged="MovieListBox_OnSelectionChanged">
+						<ListBox.ItemTemplate>
+							<DataTemplate>
+								<Grid Margin="0,5,0,0">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="Auto"></ColumnDefinition>
+										<ColumnDefinition Width="*"></ColumnDefinition>
+									</Grid.ColumnDefinitions>
+									<Border Grid.Column="0" BorderBrush="#FF2C66A1" BorderThickness="5" CornerRadius="7" Margin="5">
+										<Image Width="80" MinHeight="80" Source="{Binding Path=ImageUrl}" />
+									</Border>
+									<TextBlock Grid.Column="1" Margin="5,0,0,0" TextWrapping="Wrap" Text="{Binding Path=Title}" VerticalAlignment="Center" FontSize="24" />
+								</Grid>
+							</DataTemplate>
+						</ListBox.ItemTemplate>
+					</ListBox>
+				</Grid>
+			</controls:PivotItem>
+			<controls:PivotItem Header="Theatre HD">
+				<Grid Margin="12,0,12,0">
+					<Image Source="Images/bg_movie.png" Opacity="0.3" Stretch="Uniform" Height="350" />
+					<ListBox x:Name="TheatreHDMovieListBox" ItemsSource="{Binding Path=TheatreHDMovies}" SelectionChanged="MovieListBox_OnSelectionChanged">
+						<ListBox.ItemTemplate>
+							<DataTemplate>
+								<Grid Margin="0,5,0,0">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="Auto"></ColumnDefinition>
+										<ColumnDefinition Width="*"></ColumnDefinition>
+									</Grid.ColumnDefinitions>
+									<Border Grid.Column="0" BorderBrush="#FF2C66A1" BorderThickness="5" CornerRadius="7" Margin="5">
+										<Image Width="80" MinHeight="80" Source="{Binding Path=ImageUrl}" />
+									</Border>
+									<TextBlock Grid.Column="1" Margin="5,0,0,0" TextWrapping="Wrap" Text="{Binding Path=Title}" VerticalAlignment="Center" FontSize="24" />
+								</Grid>
+							</DataTemplate>
+						</ListBox.ItemTemplate>
+					</ListBox>
+				</Grid>
+			</controls:PivotItem>
+		</controls:Pivot>
 	</Grid>
 </phone:PhoneApplicationPage>

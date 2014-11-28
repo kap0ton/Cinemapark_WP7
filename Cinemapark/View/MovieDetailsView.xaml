@@ -43,7 +43,7 @@
 				</ScrollViewer>
 			</controls:PivotItem>
 			<controls:PivotItem Header="{Binding Path=AppResources.Schedule, Source={StaticResource LocalizedStrings}}">
-				<Grid Grid.Row="1" Margin="12,0,12,0">
+				<Grid Margin="12,0,12,0">
 					<ScrollViewer>
 						<StackPanel>
 							<ItemsControl ItemsSource="{Binding Path=Schedules}">
@@ -99,7 +99,7 @@
 
 							<!-- Price Legend -->
 							<Line Stroke="White" StrokeThickness="2" Stretch="UniformToFill" HorizontalAlignment="Left"
-								X1="0" Y1="0" X2="1" Y2="0" Margin="0,10,0,0" Width="390"></Line>
+								X1="0" Y1="0" X2="1" Y2="0" Margin="0,10,0,0"></Line>
 							<TextBlock Text="Legend"></TextBlock>
 							<Grid Margin="0,0,0,5">
 								<Grid.ColumnDefinitions>

@@ -42,13 +42,17 @@ namespace Cinemapark
 
 		private void MovieListBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			var movie = MovieListBox.SelectedItem as Movie;
-			if(movie!=null)
-			{
-				var movieTitle = HttpUtility.UrlEncode(movie.Title);
-				var url = string.Format("/View/MovieDetailsView.xaml?id={0}&title={1}", movie.MovieId, movieTitle);
-				NavigationService.Navigate(new Uri(url, UriKind.Relative));
-			}
+			var lb = sender as ListBox;
+			if (lb == null)
+				return;
+
+			var movie = lb.SelectedItem as Movie;
+			if (movie == null)
+				return;
+
+			var movieTitle = HttpUtility.UrlEncode(movie.Title);
+			var url = string.Format("/View/MovieDetailsView.xaml?id={0}&title={1}", movie.MovieId, movieTitle);
+			NavigationService.Navigate(new Uri(url, UriKind.Relative));
 		}
 
 		private void MainPage_OnLoaded(object sender, RoutedEventArgs e)

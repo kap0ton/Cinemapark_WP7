@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -35,6 +36,12 @@ namespace Cinemapark.ViewModel
 			get { return _movies; }
 		}
 
+		private readonly ObservableCollection<Movie> _theatreHDMovies;
+		public ObservableCollection<Movie> TheatreHDMovies
+		{
+			get { return _theatreHDMovies; }
+		}
+
 		private bool _progressBarIsIndeterminate;
 		public bool ProgressBarIsIndeterminate
 		{
@@ -58,6 +65,8 @@ namespace Cinemapark.ViewModel
 		}
 
 		private readonly AppSettings _appSettings;
+
+		private bool _isLoaded;
 
 		#endregion
 
@@ -83,6 +92,7 @@ namespace Cinemapark.ViewModel
 		{
 			_appSettings = new AppSettings();
 			_movies = new ObservableCollection<Movie>();
+			_theatreHDMovies = new ObservableCollection<Movie>();
 			ProgressBarIsIndeterminate = false;
 			ProgressBarVisibility = Visibility.Collapsed;
 		}
@@ -110,6 +120,10 @@ namespace Cinemapark.ViewModel
 			else
 			{
 				LoadMovies();
+
+				var s = new Lib.MovieService();
+				var items = s.GetItems();
+				Debug.Assert(items > 0);
 			}
 		}
 
@@ -180,12 +194,18 @@ namespace Cinemapark.ViewModel
 
 		public void LoadMovies()
 		{
-			UpdateProgressBar(true);
-			Movies.Clear();
-			var client = new WebClient();
-			client.DownloadStringCompleted += GetMoviesCompleted;
-			var path = string.Format(Movie.MoviesUri, _appSettings.Multiplex.MultiplexId);
-			client.DownloadStringAsync(new Uri(path, UriKind.Absolute));
+			if (!_isLoaded)
+			{
+				UpdateProgressBar(true);
+				Movies.Clear();
+				TheatreHDMovies.Clear();
+				var client = new WebClient();
+				client.DownloadStringCompleted += GetMoviesCompleted;
+				var path = string.Format(Movie.MoviesUri, _appSettings.Multiplex.MultiplexId);
+				client.DownloadStringAsync(new Uri(path, UriKind.Absolute));
+			}
+			else
+				UpdateProgressBar(false);
 		}
 
 		private void GetMoviesCompleted(object sender, DownloadStringCompletedEventArgs e)
@@ -213,7 +233,10 @@ namespace Cinemapark.ViewModel
 
 					foreach (var movie in items)
 					{
-						Movies.Add(movie);
+						if (movie.Title.StartsWith("TheatreHD"))
+							TheatreHDMovies.Add(movie);
+						else
+							Movies.Add(movie);
 					}
 				}
 			}
@@ -224,6 +247,7 @@ namespace Cinemapark.ViewModel
 			finally
 			{
 				UpdateProgressBar(false);
+				_isLoaded = true;
 			}
 		}
 
